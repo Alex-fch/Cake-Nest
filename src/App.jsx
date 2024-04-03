@@ -1,33 +1,16 @@
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import LoginPage from './pages/login/LoginPage';
+import OrderPage from './pages/order/OrderPage';
+import ErrorPage from './pages/error/ErrorPage';
 
 function App() {
-  const [name, setName] = useState('');
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (name.trim() === '') {
-      alert('Veuillez entrer un prénom.');
-      return;
-    }
-    setName('');
-    alert('Bonjour ' + name);
-  }
-
-  const handleChange = (event) => {
-    setName(event.target.value);
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Bienvenue chez nous!</h1>
-      <div>
-        <h2>Connectez-vous</h2>
-        <input type="text" value={name} placeholder="Entrez votre prénom..." onChange={handleChange} />
-        <button type="submit">Accédez à votre espace</button>
-      </div>
-    </form>
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path='/order/:name' element={<OrderPage />} />
+      <Route path="/*" element={<ErrorPage />} />
+  </Routes>
   );
 }
 
