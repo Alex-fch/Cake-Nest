@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import LoginPage from './pages/login/LoginPage';
 import OrderPage from './pages/order/OrderPage';
-import ErrorPage from './pages/error/ErrorPage';
+import LoginPage from './pages/login/loginPage';
+import ErrorPage from './pages/error/errorPage';
 
 function App() {
   return (
