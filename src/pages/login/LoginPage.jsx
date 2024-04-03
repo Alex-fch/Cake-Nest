@@ -1,35 +1,26 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import styled from 'styled-components';
+import Background from '../../assets/images/tarts.jpg';
+import Logo from '../../components/Logo';
 
-function LoginPage() {
-  const [name, setName] = useState('');
-  const navigate = useNavigate();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (name.trim() === '') {
-      alert('Veuillez entrer un prénom.');
-      return;
-    }
-    navigate(`/order/${name}`);
-    setName('');
-  }
-
-  const handleChange = (event) => {
-    setName(event.target.value);
-  }
-
+export default function LoginPage() {
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Bienvenue chez nous!</h1>
-      <div>
-        <h2>Connectez-vous</h2>
-        <input type="text" value={name} placeholder="Entrez votre prénom..." onChange={handleChange} />
-        <button type="submit">Accédez à votre espace</button>
-      </div>
-    </form>
+    <Container>
+      <Logo/>
+      <LoginForm/>
+    </Container>
   );
 }
-
-export default LoginPage;
+  const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 98vh;
+    background-image: url(${Background});
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
