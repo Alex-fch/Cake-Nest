@@ -25,7 +25,7 @@ export default function Profile({ userName }) {
 }
 
 Profile.propTypes = {
-    userName: PropTypes.isRequired
+    userName: PropTypes.string.isRequired
 };
 
 const ProfileStyled = styled.div`

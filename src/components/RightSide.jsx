@@ -17,5 +17,5 @@ const StyledRightSide = styled.div`
     font-size: ${theme.fonts.size.P2};
 `
 LeftSide.propTypes = {
-    userName: PropTypes.isRequired
+    userName: PropTypes.string.isRequired
 };
