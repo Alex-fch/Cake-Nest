@@ -1,17 +1,23 @@
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import NavBar from '../../components/NavBar';
+import Main from  '../../components/Main';
+import styled from 'styled-components';
+import { theme } from '../../assets/styles/theme';
 
-function OrderPage() {
+export default function OrderPage() {
     const { name } = useParams();
 
     return (
-        <div>
-            <h1>Bonjour {name}</h1>
-            <Link to="/">
-                <button>Déconnexion</button>
-            </Link>
-        </div>
+        <StyledOrderPage>
+            <NavBar userName= {name} />
+            <Main />
+        </StyledOrderPage>
     )
 }
  
-export default OrderPage
+const StyledOrderPage = styled.div`
+    background: ${theme.colors.primary};
+    background-size: cover;
+    background-blend-mode: darken;
+    padding: 30px 35px 30px 35px;
+`
