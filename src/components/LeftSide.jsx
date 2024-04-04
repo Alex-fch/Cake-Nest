@@ -20,5 +20,5 @@ const StyledLeftSide = styled.div`
     }
 `
 LeftSide.propTypes = {
-    userName: PropTypes.isRequired
+    userName: PropTypes.string.isRequired
 };

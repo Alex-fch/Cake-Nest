@@ -4,17 +4,17 @@ import  RightSide from './RightSide'
 import PropTypes from  'prop-types';
 import {theme} from '../../src/assets/styles/theme'
 
-export default function NavBar(props) {
+export default function NavBar({userName}) {
 
     return (
         <StyledNavBar>
-            <LeftSide userName= {props.userName}/>
-            <RightSide userName= {props.userName}/>
+            <LeftSide userName= {userName}/>
+            <RightSide userName= {userName}/>
         </StyledNavBar>
     )
 }
 NavBar.propTypes = {
-    userName: PropTypes.string
+    userName: PropTypes.string.isRequired
 };
 
 const StyledNavBar = styled.div`
