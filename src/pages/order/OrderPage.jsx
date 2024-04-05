@@ -9,15 +9,15 @@ export default function OrderPage() {
 
     return (
         <StyledOrderPage>
-            <NavBar userName= {name} />
-            <Main />
+            <NavBar userName= {name} className="navbar"/>
+            <Main className="main"/>
         </StyledOrderPage>
     )
 }
  
 const StyledOrderPage = styled.div`
     background: ${theme.colors.primary};
-    background-size: cover;
-    background-blend-mode: darken;
-    padding: 30px 35px 30px 35px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 `
