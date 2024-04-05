@@ -18,6 +18,7 @@ NavBar.propTypes = {
 };
 
 const StyledNavBar = styled.div`
+    margin: 30px 30px 0 30px;
     background-color: ${theme.colors.white};
     border-radius: 15px 15px 0 0;
     padding: 25px;
