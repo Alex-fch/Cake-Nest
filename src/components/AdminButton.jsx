@@ -4,6 +4,30 @@ import { theme } from '../assets/styles/theme';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
+export default function AdminButton() {
+    const [isAdminMode, setIsAdminMode] = useState(false);
+
+    const handleClick = () => {
+        setIsAdminMode(!isAdminMode);
+        if (!isAdminMode) {
+            toast.info("Mode admin actif", {
+                style: { backgroundColor: 'black',
+                        color: 'white',
+                        fontWeight: 500 },
+              });
+        }
+    };
+
+    return (
+        <>
+            <StyledAdminButton isAdminMode={isAdminMode} onClick={handleClick}>
+                <span>{isAdminMode ? "DESACTIVER LE MODE ADMIN" : "ACTIVER LE MODE ADMIN"}</span>
+                <div></div>
+            </StyledAdminButton>
+            <ToastContainer position="bottom-right"/>
+        </>
+    );
+}
 
 const textFadeAnimation = keyframes`
     0% {
@@ -20,33 +44,8 @@ const textFadeAnimation = keyframes`
     }
 `;
 
-export default function AdminButton() {
-    const [isAdminMode, setIsAdminMode] = useState(false);
-
-    const handleClick = () => {
-        setIsAdminMode(!isAdminMode);
-        if (!isAdminMode) {
-            toast.info("Mode admin actif", {
-                style: { backgroundColor: 'black',
-                        color: 'white',
-                        fontWeight: 500 }, // Change le fond de ce toast
-              });
-        }
-
-    }
-
-    return (
-        <>
-        <StyledAdminButton isAdminMode={isAdminMode} onClick={handleClick}>
-            <span>{isAdminMode ? "DESACTIVER LE MODE ADMIN" : "ACTIVER LE MODE ADMIN"}</span>
-            <div></div>
-        </StyledAdminButton>
-        <ToastContainer position="bottom-right"/>
-        </>
-    )
-}
-
-const StyledAdminButton = styled.div`
+// eslint-disable-next-line no-unused-vars
+const StyledAdminButton = styled(({ isAdminMode, ...rest }) => <div {...rest} />)`
     cursor: grab;
     position: relative; 
     display: flex;
@@ -69,7 +68,7 @@ const StyledAdminButton = styled.div`
         ${({ isAdminMode }) =>
             isAdminMode &&
             css`
-                animation: ${textFadeAnimation} 1.1s ease; /* Utilisation de l'animation définie */
+                animation: ${textFadeAnimation} 1.1s ease;
                 animation-direction: alternate;
                 animation-fill-mode: forwards;
             `}
@@ -81,11 +80,11 @@ const StyledAdminButton = styled.div`
         border-radius: 50%;
         height: 40px;
         width: 40px;
-        margin-left: 4px;
+        margin-left: 3px;
         margin-right: 4px;
         transition: margin-left 1s ease; 
-        ${(props) => props.isAdminMode && `
-            margin-left: calc(100% - 45px); /* Déplacement de la div vers la droite */
+        ${({ isAdminMode }) => isAdminMode && `
+            margin-left: calc(100% - 44px);
         `}
     }
-`
+`;
