@@ -2,9 +2,15 @@ import styled from 'styled-components';
 import { theme } from '../../src/assets/styles/theme';
 import { fakeMenu } from '../utils/data/fakeMenu';
 import Card from './Card';
+import PanelAdmin from './PanelAdmin';
+import { ThemeContext } from '../utils/context/Context';
+import { useContext } from 'react';
 
 export default function Main() {
+    const { admin } = useContext(ThemeContext)
+
     return (
+        <>
         <StyledMain>
             {fakeMenu.map((menu, index) => (
                 <Card
@@ -15,6 +21,10 @@ export default function Main() {
                 />
             ))}
         </StyledMain>
+        {
+            admin ? <PanelAdmin/> : null
+        }
+        </>
     )
 }
  

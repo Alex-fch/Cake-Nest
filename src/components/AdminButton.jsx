@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../utils/context/Context';
 import styled, { keyframes, css } from 'styled-components';
 import { theme } from '../assets/styles/theme';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AdminButton() {
-    const [isAdminMode, setIsAdminMode] = useState(false);
+    const { setAdmin, admin } = useContext(ThemeContext)
 
     const handleClick = () => {
-        setIsAdminMode(!isAdminMode);
-        if (!isAdminMode) {
+        setAdmin(!admin);
+        if (!admin) {
             toast.info("Mode admin actif", {
                 style: { backgroundColor: 'black',
                         color: 'white',
@@ -20,8 +21,8 @@ export default function AdminButton() {
 
     return (
         <>
-            <StyledAdminButton isAdminMode={isAdminMode} onClick={handleClick}>
-                <span>{isAdminMode ? "DESACTIVER LE MODE ADMIN" : "ACTIVER LE MODE ADMIN"}</span>
+            <StyledAdminButton isAdminMode={admin} onClick={handleClick}>
+                <span>{admin ? "DESACTIVER LE MODE ADMIN" : "ACTIVER LE MODE ADMIN"}</span>
                 <div></div>
             </StyledAdminButton>
             <ToastContainer position="bottom-right"/>
@@ -46,7 +47,7 @@ const textFadeAnimation = keyframes`
 
 // eslint-disable-next-line no-unused-vars
 const StyledAdminButton = styled(({ isAdminMode, ...rest }) => <div {...rest} />)`
-    cursor: grab;
+    cursor: pointer;
     position: relative; 
     display: flex;
     align-items: center;

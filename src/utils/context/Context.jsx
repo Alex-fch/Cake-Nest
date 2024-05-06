@@ -1,18 +1,42 @@
 import { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-export const UserNameContext = createContext()
+export const ButtonContext = createContext();
 
-export const UserNameProvider = ({ children }) => {
-    const [userName, setUserName] = useState('')
-    
+export const ButtonProvider = ({ children }) => {
+    const [textButton, setTextButton] = useState('Ajouter un produit')
+
+    const buttonValue = {
+        textButton,
+        setTextButton
+    }
     return (
-        <UserNameContext.Provider value={{ userName, setUserName }}>
+        <ButtonContext.Provider value={ buttonValue }>
             {children}
-        </UserNameContext.Provider>
+        </ButtonContext.Provider>
+  )
+}
+
+export const ThemeContext = createContext()
+
+export const AdminProvider = ({ children }) => {
+    const [admin, setAdmin] = useState(false)
+
+    const adminValue = {
+        admin,
+        setAdmin,
+    }
+    return (
+        <ThemeContext.Provider value={ adminValue }>
+            {children}
+        </ThemeContext.Provider>
   )
 };
 
-UserNameProvider.propTypes = {
-    children: PropTypes.isRequired
+AdminProvider.propTypes = {
+    children: PropTypes.element.isRequired
 };
+
+ButtonProvider.propTypes = {
+    children: PropTypes.element.isRequired
+}

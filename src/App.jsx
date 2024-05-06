@@ -6,11 +6,11 @@ import ErrorPage from './pages/error/ErrorPage';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path='/order/:name' element={<OrderPage />} />
-      <Route path="/*" element={<ErrorPage />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path='/order/:name' element={<OrderPage />} />
+        <Route path="/*" element={<ErrorPage />} />
+      </Routes>
   );
 }
 
