@@ -1,21 +1,6 @@
 import { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
-
-export const ButtonContext = createContext();
-
-export const ButtonProvider = ({ children }) => {
-    const [textButton, setTextButton] = useState('Ajouter un produit')
-
-    const buttonValue = {
-        textButton,
-        setTextButton
-    }
-    return (
-        <ButtonContext.Provider value={ buttonValue }>
-            {children}
-        </ButtonContext.Provider>
-  )
-}
+import { fakeMenu } from '../data/fakeMenu';
 
 export const ThemeContext = createContext()
 
@@ -33,10 +18,26 @@ export const AdminProvider = ({ children }) => {
   )
 };
 
+export const FakeMenuContext = createContext()
+
+export const FakeMenuProvider = ({ children }) => {
+    const [fakeMenuTable, setFakeMenu] = useState(fakeMenu)
+
+    const fakeMenuValue = {
+        fakeMenuTable,
+        setFakeMenu,
+    }
+    return (
+        <FakeMenuContext.Provider value={ fakeMenuValue }>
+            {children}
+        </FakeMenuContext.Provider>
+  )
+};
+
 AdminProvider.propTypes = {
     children: PropTypes.element.isRequired
 };
 
-ButtonProvider.propTypes = {
+FakeMenuProvider.propTypes = {
     children: PropTypes.element.isRequired
 }

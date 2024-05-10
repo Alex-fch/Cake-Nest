@@ -63,6 +63,7 @@ const StyledAdminButton = styled(({ isAdminMode, ...rest }) => <div {...rest} />
         color: ${theme.colors.primary};
         margin: ${({ isAdminMode }) => isAdminMode ? '0 0 0 10px' : '0 0 0 55px'};
         font-size: ${({ isAdminMode }) => isAdminMode ? '13px' : '14px'};
+        font-family: 'OpenSans', sans-serif;
         position: relative; 
         z-index: 1;
         transition: margin 1s ease;
