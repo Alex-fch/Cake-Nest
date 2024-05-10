@@ -6,15 +6,12 @@ import { MdModeEditOutline } from "react-icons/md"
 import { FiChevronUp } from "react-icons/fi"
 import { FiChevronDown } from "react-icons/fi"
 import PanelDetail from './PanelDetail';
-import { useContext, useState } from 'react';
-import { ButtonContext } from '../utils/context/Context';
+import { useState } from 'react';
 
 export default function PanelAdmin() {
     const [isOpen, setIsOpen] = useState(false);
-    const { setTextButton } = useContext(ButtonContext)
-    const  handleClick = (value) => {
+    const  handleClick = () => {
         setIsOpen(!isOpen);
-        setTextButton(value);
     }
     const icon = isOpen  ? <FiChevronDown className="icon"/> : <FiChevronUp className="icon"/>
     return (
