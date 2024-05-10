@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { theme } from "../assets/styles/theme";
 import { GiCupcake } from "react-icons/gi";
@@ -7,13 +7,29 @@ import { MdOutlineEuro } from "react-icons/md";
 import InputTextPanel from "./InputTextPanel";
 import PrimaryButtonPanel from "./PrimaryButtonPanel";
 import { fakeMenu } from '../utils/data/fakeMenu';
-import { FakeMenuContext } from "../utils/context/Context";
+import { FakeMenuContext, ProductContext } from "../utils/context/Context";
 
 export default function PanelAdminForm() {
   const [productName, setProductName] = useState('');
   const [urlLink, setUrlLink] = useState('');
   const [price, setPrice] = useState('');
-  const { fakeMenuTable, setFakeMenu } = useContext(FakeMenuContext)
+  const { fakeMenuTable, setFakeMenu } = useContext(FakeMenuContext);
+  const { product, label } = useContext(ProductContext);
+
+  useEffect(() => {
+    if (product !== null && label === "Modifier un produit") {
+      const result = fakeMenuTable.find(prod => prod.id === product);
+      if (result) {
+        setProductName(result.title);
+        setUrlLink(result.imageSource);
+        setPrice(result.price.toString());
+      }
+    } else {
+      setProductName('');
+      setUrlLink('');
+      setPrice('');
+    }
+  }, [product, fakeMenuTable, label]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,19 +53,59 @@ export default function PanelAdminForm() {
   }
 
   const handleChangeName = (event) => {
-    setProductName(event.target.value);
+    const newName = event.target.value;
+    setProductName(newName);
+    
+    // Mettre à jour le titre dans le tableau fakeMenuTable
+    const fakeMenuUpdate = fakeMenuTable.map(item => {
+      if(item.id === product){
+        return {
+          ...item,
+          title: newName
+        };
+      }
+      return item; // Retourne l'élément sans modification si l'ID ne correspond pas
+    });
+    
+    // Mettre à jour le contexte avec le nouveau tableau
+    setFakeMenu(fakeMenuUpdate);
   }
+  
   const handleChangeLink = (event) => {
-    if(event.target.value.trim() === ''){
-      const url = "../../src/assets/images/cupcake-item.png";
-      setUrlLink(url);
-    } else {
-
-      setUrlLink(event.target.value);
-    }
+    const newUrlLink = event.target.value;
+    setUrlLink(newUrlLink);
+    
+    // Mettre à jour le titre dans le tableau fakeMenuTable
+    const fakeMenuUpdate = fakeMenuTable.map(item => {
+      if(item.id === product){
+        return {
+          ...item,
+          imageSource: newUrlLink
+        };
+      }
+      return item; // Retourne l'élément sans modification si l'ID ne correspond pas
+    });
+    
+    // Mettre à jour le contexte avec le nouveau tableau
+    setFakeMenu(fakeMenuUpdate);
   }
   const handleChangePrice = (event) => {
-    setPrice(event.target.value);
+    const newPrice = event.target.value;
+    setPrice(newPrice);
+    
+    // Mettre à jour le titre dans le tableau fakeMenuTable
+    const fakeMenuUpdate = fakeMenuTable.map(item => {
+      if(item.id === product){
+        return {
+          ...item,
+          price: newPrice
+        };
+      }
+      return item; // Retourne l'élément sans modification si l'ID ne correspond pas
+    });
+    
+    // Mettre à jour le contexte avec le nouveau tableau
+    setFakeMenu(fakeMenuUpdate);
   }
 
   return (
@@ -61,7 +117,7 @@ export default function PanelAdminForm() {
         <InputTextPanel value={productName} onChange={handleChangeName} placeholder={"Nom du produit"} required Icon={<GiCupcake className="icon" />}/>
         <InputTextPanel value={urlLink} onChange={handleChangeLink} placeholder={"Lien URL d'une image (ex: https://la-photo-de-mon-produit.png"} Icon={<BsFillCameraFill className="icon" />}/>
         <InputTextPanel value={price} onChange={handleChangePrice} placeholder={"Prix"} required Icon={<MdOutlineEuro className="icon" />}/>
-        <PrimaryButtonPanel label={"Ajouter un nouveau produit"}/>
+        { (label === "Ajouter un produit") ? <PrimaryButtonPanel label={"Ajouter un nouveau produit"}/> : <span>Cliquez sur un produit pour le modifier en temps réel</span>}
       </Form>
     </DivPanel>
   );

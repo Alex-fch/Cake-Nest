@@ -1,18 +1,20 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import PanelAdminForm from './PanelAdminForm';
+import { theme } from '../assets/styles/theme';
+import { HiCursorClick } from "react-icons/hi";
+import { useContext } from 'react';
+import { ProductContext } from '../utils/context/Context';
 
-export default function PanelDetail({ isopen }) {
+export default function PanelDetail() {
+    const { isopen, label, product } = useContext(ProductContext);
     return (
         <StyledPanelDetail open={isopen}>
-            <PanelAdminForm/>
+            {(label === "Ajouter un produit" || label === "" || product !== null ) ? 
+            <PanelAdminForm/> : <span className='text'>Cliquez sur un produit pour le modifier <HiCursorClick/></span>
+            }
         </StyledPanelDetail>
     )
 }
-
-PanelDetail.propTypes = {
-    isopen: PropTypes.bool.isRequired
-};
 
 const StyledPanelDetail = styled.div`
     width: 100%;
@@ -23,4 +25,11 @@ const StyledPanelDetail = styled.div`
     transition: height 1s ease; /* Ajout de la transition */
     display: ${({ open }) => open ? 'block' : 'none'};
     transition: display 2s ease; /* Ajout de la transition */
+
+    .text {
+        margin-left: 50px;
+        font-family: "Pacifico", sans-serif;
+        color: ${theme.colors.greyDark};
+        font-size: ${theme.fonts.size.P3};
+    }
 `;
