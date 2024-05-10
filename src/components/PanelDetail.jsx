@@ -17,7 +17,6 @@ export default function PanelDetail() {
 }
 
 const StyledPanelDetail = styled.div`
-    width: 100%;
     height: ${({ open }) =>  open ? '400px' : '0px'};
     background-color: white;
     border-radius: 0 0 15px 15px;

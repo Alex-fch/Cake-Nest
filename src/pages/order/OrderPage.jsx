@@ -21,7 +21,6 @@ export default function OrderPage() {
 const StyledOrderPage = styled.div`
     position: relative;
     background: ${theme.colors.primary};
-    height: 100vh;
     display: flex;
     flex-direction: column;
 `
