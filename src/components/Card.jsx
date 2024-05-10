@@ -45,7 +45,6 @@ const StyledCard = styled.div`
     margin-left: 50px;
     margin-right: 50px;
     padding: 30px 20px 30px 20px;
-    height: 420px;
     /* Condition pour le hover seulement si admin est vrai */
     ${({ admin }) => admin ? `
       &:hover {
