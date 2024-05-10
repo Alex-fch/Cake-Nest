@@ -3,15 +3,18 @@ import NavBar from '../../components/NavBar';
 import Main from  '../../components/Main';
 import styled from 'styled-components';
 import { theme } from '../../assets/styles/theme';
+import { ProductProvider } from '../../utils/context/Context';
 
 export default function OrderPage() {
     const { name } = useParams();
 
     return (
-        <StyledOrderPage>
-            <NavBar userName= {name} className="navbar"/>
-            <Main className="main"/>
-        </StyledOrderPage>
+        <ProductProvider>
+            <StyledOrderPage>
+                <NavBar userName= {name} className="navbar"/>
+                <Main className="main"/>
+            </StyledOrderPage>
+        </ProductProvider>
     )
 }
  

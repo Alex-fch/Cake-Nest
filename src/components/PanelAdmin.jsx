@@ -6,44 +6,42 @@ import { MdModeEditOutline } from "react-icons/md"
 import { FiChevronUp } from "react-icons/fi"
 import { FiChevronDown } from "react-icons/fi"
 import PanelDetail from './PanelDetail';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { ProductContext } from '../utils/context/Context';
 
 export default function PanelAdmin() {
-    const [isOpen, setIsOpen] = useState(false);
-    const  handleClick = () => {
-        setIsOpen(!isOpen);
+    const { isopen, setIsOpen, setLabel } = useContext(ProductContext);
+    //const [isOpen, setIsOpen] = useState(false);
+    //const [label, setLabel] = useState("");
+    const  handleClick = (label) => {
+        setLabel(label);
+        if(label === "" || (label !== "" && isopen === false)) {
+            setIsOpen(!isopen);
+        }
+        
     }
-    const icon = isOpen  ? <FiChevronDown className="icon"/> : <FiChevronUp className="icon"/>
+    const icon = isopen  ? <FiChevronDown className="icon"/> : <FiChevronUp className="icon"/>
     return (
         <StyledPanelAdmin>
             <div className='divo'>
                 <div className='divin'>
                     <PanelButton
                                 onClick={() => handleClick("")}
-                                text="" 
-                                background={theme.colors.dark} 
-                                colortext={theme.colors.white} 
+                                label="" 
                                 Icon = { icon }
-                                size="70px"
                     />
                     <PanelButton
                                 onClick={() => handleClick("Ajouter un produit")}
-                                text="Ajouter un produit" 
-                                background={theme.colors.white} 
-                                colortext={theme.colors.greyDark} 
+                                label="Ajouter un produit" 
                                 Icon={<AiOutlinePlus className="icon"/>}
-                                size="250px"
                     />
                     <PanelButton
                                 onClick={() => handleClick("Modifier un produit")}
-                                text="Modifier un produit" 
-                                background={theme.colors.white} 
-                                colortext={theme.colors.greyDark} 
+                                label="Modifier un produit" 
                                 Icon={<MdModeEditOutline className="icon"/>}
-                                size="250px"
                     />
                 </div>
-                <PanelDetail isopen={ isOpen }/>
+                <PanelDetail/>
             </div>
         </StyledPanelAdmin>
     )

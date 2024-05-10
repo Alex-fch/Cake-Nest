@@ -1,25 +1,20 @@
 import styled from 'styled-components';
 import PropTypes from  'prop-types';
 
-export default function PanelButton({onClick, background, text, colortext, size, Icon}) {
+export default function PanelButton({onClick, label, Icon}) {
     
     return (
-        <StyledPanelButton
-            onClick={onClick}
-            background={background} 
-            colortext={colortext} 
-            size={size}>
+        <StyledPanelButton onClick={onClick} className='panelButton'>
             {Icon}
-            <span>{text}</span>
+            {(label !== '') ?
+            <span>{label}</span> : null
+            }
         </StyledPanelButton>
     )
 }
 PanelButton.propTypes = {
-    text: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    colortext: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     Icon: PropTypes.element.isRequired,
-    size: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
 };
 const StyledPanelButton = styled.button`
@@ -29,7 +24,7 @@ const StyledPanelButton = styled.button`
     justify-content: center;
     align-items: center;
     background-color: ${props => props.background};
-    width: ${props => props.size};
+    min-width: 50px;
     height: 40px;
     border-radius: 10px 10px 0 0;
     color: ${props => props.colortext};
@@ -40,6 +35,7 @@ const StyledPanelButton = styled.button`
 
     span {
         margin-left: 15px;
+        margin-right: 15px;
         font-family: 'OpenSans', sans-serif;
     }
 `
